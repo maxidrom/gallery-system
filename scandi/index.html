@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+body { margin:0; background:#000; overflow:hidden; }
+img { width:100vw; height:100vh; object-fit:contain; }
+.info {
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  color:white;
+  font-family:sans-serif;
+  font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<img id="img"/>
+<div class="info" id="info"></div>
+
+<script>
+let data, i = 0;
+
+async function load() {
+  data = await fetch('meta.json').then(r => r.json());
+  render();
+}
+
+function render() {
+  document.getElementById('img').src = data.images[i];
+  document.getElementById('info').innerText =
+    `${data.title} — ${i+1}/${data.images.length}`;
+}
+
+function next(){ i = Math.min(i+1, data.images.length-1); render(); }
+function prev(){ i = Math.max(i-1, 0); render(); }
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+});
+
+window.addEventListener('wheel', e => {
+  if (e.deltaY > 0) next();
+  else prev();
+});
+
+let startY = 0;
+window.addEventListener('touchstart', e => startY = e.touches[0].clientY);
+window.addEventListener('touchend', e => {
+  let endY = e.changedTouches[0].clientY;
+  if (startY > endY) next();
+  else prev();
+});
+
+load();
+</script>
+
+</body>
+</html>
