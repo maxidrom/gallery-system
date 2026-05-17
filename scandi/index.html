@@ -31,7 +31,7 @@ async function load() {
 function render() {
   document.getElementById('img').src = data.images[i];
   document.getElementById('info').innerText =
-    `${data.title} — ${i+1}/${data.images.length}`;
+    `${data.title} - ${i+1}/${data.images.length}`;
 }
 
 function next(){ i = Math.min(i+1, data.images.length-1); render(); }
