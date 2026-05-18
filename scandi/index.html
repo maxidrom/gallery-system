@@ -172,9 +172,11 @@ window.addEventListener("touchstart", (e) => {
 window.addEventListener("touchend", (e) => {
   let deltaY = e.changedTouches[0].clientY - startY;
   let deltaX = e.changedTouches[0].clientX - startX;
-  let alfa = Math.atan(deltaY / deltaX);
-  if (alfa > (-3.0 / 4.0) * Math.PI && alfa < Math.PI / 4.0) next();
+  if (deltaY > deltaX) next();
   else prev();
+  // let alfa = Math.atan(deltaY / deltaX);
+  // if (alfa > (-3.0 / 4.0) * Math.PI && alfa < Math.PI / 4.0) next();
+  // else prev();
 });
   
 document.getElementById('prevBtn')
