@@ -4,7 +4,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 body { margin:0; background:#000; overflow:hidden; }
+
 img { width:100vw; height:100vh; object-fit:contain; }
+
+@media (hover: none) and (pointer: coarse) {
+  .nav {
+    display: none;
+  }
+}
+  
+.nav {
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:60px;
+  height:60px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.15);
+  color:white;
+
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  cursor:pointer;
+
+  backdrop-filter:blur(6px);
+}
+  
+.left {
+  left:15px;
+}
+
+.right {
+  right:15px;
+}
+
+.nav:hover {
+  background:rgba(255,255,255,0.25);
+}
+  
 .info {
   position:fixed;
   bottom:10px;
@@ -13,13 +54,71 @@ img { width:100vw; height:100vh; object-fit:contain; }
   font-family:sans-serif;
   font-size:14px;
 }
+
+/* ****** Contact CSS ******* */
+#contactBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.4);
+}
+
+#contactPanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contactPanel.hidden {
+  display: none;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.panel a {
+  color: white;
+  font-size: 22px;
+  text-decoration: none;
+}
+/* ******* Contact END ******* */
+
 </style>
 </head>
 <body>
 
 <img id="img"/>
+<button id="prevBtn" class="nav left">&#8249;</button>
+<button id="nextBtn" class="nav right">&#8250;</button>  
 <div class="info" id="info"></div>
-
+<!-- ************ Contact HTML *********** -->
+  <div id="contactBtn">Contact</div>
+  <div id="contactPanel" class="hidden">
+    <div class="panel">
+      <a href="https://t.me/@maximtank" target="_blank">Telegram</a>
+      <a href="https://wa.me/48573254600" target="_blank">WhatsApp</a>
+      <a href="tel:+48573254600">Call</a>
+    </div>
+  </div>
+<!-- ************ Contact HTML END *********** -->
+  
 <script>
 let data, i = 0;
 
@@ -31,11 +130,28 @@ async function load() {
 function render() {
   document.getElementById('img').src = data.images[i];
   document.getElementById('info').innerText =
-    `${data.title} — ${i+1}/${data.images.length}`;
+    `${data.title} - ${i+1}/${data.images.length}`;
 }
 
-function next(){ i = Math.min(i+1, data.images.length-1); render(); }
-function prev(){ i = Math.max(i-1, 0); render(); }
+function next() {
+  i++;
+
+  if (i >= data.images.length) {
+    i = 0;
+  }
+
+  render();
+}
+
+function prev() {
+  i--;
+
+  if (i < 0) {
+    i = data.images.length - 1;
+  }
+
+  render();
+}
 
 window.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
@@ -54,6 +170,33 @@ window.addEventListener('touchend', e => {
   if (startY > endY) next();
   else prev();
 });
+
+document.getElementById('prevBtn')
+  .addEventListener('click', prev);
+
+document.getElementById('nextBtn')
+  .addEventListener('click', next);
+
+// *********** Contact JS **************** */
+  const btn = document.getElementById('contactBtn');
+  const panel = document.getElementById('contactPanel');
+  
+  btn.addEventListener('click', () => {
+    panel.classList.remove('hidden');
+  });
+  
+  panel.addEventListener('click', (e) => {
+    if (e.target === panel) {
+      panel.classList.add('hidden');
+    }
+  });
+  
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      panel.classList.add('hidden');
+    }
+  });
+// *********** Contact JS END ************ */
 
 load();
 </script>
