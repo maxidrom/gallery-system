@@ -164,13 +164,19 @@ window.addEventListener('wheel', e => {
 });
 
 let startY = 0;
-window.addEventListener('touchstart', e => startY = e.touches[0].clientY);
-window.addEventListener('touchend', e => {
-  let endY = e.changedTouches[0].clientY;
-  if (startY > endY) next();
+let startX = 0;
+window.addEventListener("touchstart", (e) => {
+  startY = e.touches[0].clientY;
+  startX = e.touches[0].clientX;
+});
+window.addEventListener("touchend", (e) => {
+  let deltaY = e.changedTouches[0].clientY - startY;
+  let deltaX = e.changedTouches[0].clientX - startX;
+  let alfa = Math.atan(deltaY / deltaX);
+  if (alfa > (-3 / 4) * Math.PI && alfa < Math.PI / 4) next();
   else prev();
 });
-
+  
 document.getElementById('prevBtn')
   .addEventListener('click', prev);
 
