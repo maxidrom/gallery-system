@@ -173,7 +173,7 @@ window.addEventListener("touchend", (e) => {
   let deltaY = e.changedTouches[0].clientY - startY;
   let deltaX = e.changedTouches[0].clientX - startX;
   let alfa = Math.atan(deltaY / deltaX);
-  if (alfa > (-3 / 4) * Math.PI && alfa < Math.PI / 4) next();
+  if (alfa > (-3.0 / 4.0) * Math.PI && alfa < Math.PI / 4.0) next();
   else prev();
 });
   
