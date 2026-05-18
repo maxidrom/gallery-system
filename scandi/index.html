@@ -55,7 +55,7 @@ img { width:100vw; height:100vh; object-fit:contain; }
   font-size:14px;
 }
 
-<!-- ****** Contact CSS ******* -->
+/* ****** Contact CSS ******* */
 #contactBtn {
   position: fixed;
   bottom: 20px;
@@ -98,7 +98,7 @@ img { width:100vw; height:100vh; object-fit:contain; }
   font-size: 22px;
   text-decoration: none;
 }
-<!-- ******* Contact END ******* -->
+/* ******* Contact END ******* */
 
 </style>
 </head>
@@ -108,14 +108,16 @@ img { width:100vw; height:100vh; object-fit:contain; }
 <button id="prevBtn" class="nav left">&#8249;</button>
 <button id="nextBtn" class="nav right">&#8250;</button>  
 <div class="info" id="info"></div>
-<div id="contactBtn">Contact</div>
-<div id="contactPanel" class="hidden">
-  <div class="panel">
-    <a href="https://t.me/YOUR_USERNAME" target="_blank">Telegram</a>
-    <a href="https://wa.me/48XXXXXXXXX" target="_blank">WhatsApp</a>
-    <a href="tel:+48XXXXXXXXX">Call</a>
+<!-- ************ Contact HTML *********** -->
+  <div id="contactBtn">Contact</div>
+  <div id="contactPanel" class="hidden">
+    <div class="panel">
+      <a href="https://t.me/YOUR_USERNAME" target="_blank">Telegram</a>
+      <a href="https://wa.me/48XXXXXXXXX" target="_blank">WhatsApp</a>
+      <a href="tel:+48XXXXXXXXX">Call</a>
+    </div>
   </div>
-</div>
+<!-- ************ Contact HTML END *********** -->
   
 <script>
 let data, i = 0;
@@ -175,7 +177,7 @@ document.getElementById('prevBtn')
 document.getElementById('nextBtn')
   .addEventListener('click', next);
 
-/* *********** Contact JS **************** */
+// *********** Contact JS **************** */
   const btn = document.getElementById('contactBtn');
   const panel = document.getElementById('contactPanel');
   
@@ -194,7 +196,7 @@ document.getElementById('nextBtn')
       panel.classList.add('hidden');
     }
   });
-/* *********** Contact JS END ************ */
+// *********** Contact JS END ************ */
 
 load();
 </script>
