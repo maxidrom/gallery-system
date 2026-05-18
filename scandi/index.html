@@ -112,8 +112,12 @@ window.addEventListener('touchend', e => {
 document.getElementById('prevBtn')
   .addEventListener('click', prev);
 
-document.getElementById('nextBtn')
-  .addEventListener('click', next);
+document
+  .getElementById('nextBtn')
+  .addEventListener('pointerdown', e => {
+    e.preventDefault();
+    next();
+});
 
 load();
 </script>
