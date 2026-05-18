@@ -7,6 +7,12 @@ body { margin:0; background:#000; overflow:hidden; }
 
 img { width:100vw; height:100vh; object-fit:contain; }
 
+@media (hover: none) and (pointer: coarse) {
+  .nav {
+    display: none;
+  }
+}
+  
 .nav {
   position:fixed;
   top:50%;
@@ -112,12 +118,8 @@ window.addEventListener('touchend', e => {
 document.getElementById('prevBtn')
   .addEventListener('click', prev);
 
-document
-  .getElementById('nextBtn')
-  .addEventListener('pointerdown', e => {
-    e.preventDefault();
-    next();
-});
+document.getElementById('nextBtn')
+  .addEventListener('click', next);
 
 load();
 </script>
