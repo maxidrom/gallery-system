@@ -4,7 +4,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 body { margin:0; background:#000; overflow:hidden; }
+
 img { width:100vw; height:100vh; object-fit:contain; }
+
+.nav {
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:60px;
+  height:60px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.15);
+  color:white;
+
+  font-size:32px;
+  cursor:pointer;
+
+  backdrop-filter:blur(6px);
+}
+  
+.left {
+  left:15px;
+}
+
+.right {
+  right:15px;
+}
+
+.nav:hover {
+  background:rgba(255,255,255,0.25);
+}
+  
 .info {
   position:fixed;
   bottom:10px;
@@ -18,8 +52,10 @@ img { width:100vw; height:100vh; object-fit:contain; }
 <body>
 
 <img id="img"/>
+<button id="prevBtn" class="nav left">❮</button>
+<button id="nextBtn" class="nav right">❯</button>  
 <div class="info" id="info"></div>
-
+  
 <script>
 let data, i = 0;
 
@@ -54,6 +90,12 @@ window.addEventListener('touchend', e => {
   if (startY > endY) next();
   else prev();
 });
+
+document.getElementById('prevBtn')
+  .addEventListener('click', prev);
+
+document.getElementById('nextBtn')
+  .addEventListener('click', next);
 
 load();
 </script>
